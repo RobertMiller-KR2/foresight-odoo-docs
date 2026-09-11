@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Operational documentation for the Foresight Packaging Solutions Odoo environment.">
+  <meta name="theme-color" content="#12223d">
+  <title>Foresight Odoo Documentation</title>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to documentation</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Foresight Odoo Documentation home">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        <span>Odoo Documentation</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="quotation-sop.html">Quotation SOP</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <section class="hero" aria-labelledby="home-title">
+      <p class="eyebrow">Production handbook</p>
+      <h1 id="home-title">Foresight Odoo Documentation</h1>
+      <p class="lede">Practical, illustrated procedures for the Foresight Packaging Solutions Odoo environment. Start with the quotation workflow for standard sales or tracked Program projects.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="quotation-sop.html">Create a quotation</a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="guides-title">
+      <p class="eyebrow">Guides</p>
+      <h2 id="guides-title">Operational references</h2>
+      <p class="section-intro">Each guide is written for the live Odoo 19 workflow and separates production actions from sandbox testing.</p>
+      <div class="card-grid">
+        <a class="doc-card" href="quotation-sop.html">
+          <span class="card-kicker">Sales · SOP</span>
+          <h3>Create a quotation</h3>
+          <p>Step-by-step instructions for standard quotations and quotations that belong to a tracked Program project.</p>
+          <span class="card-link">Open guide</span>
+        </a>
+
+        <div class="status-card">
+          <span class="card-kicker">Environment</span>
+          <h3>Production is protected</h3>
+          <p>Validate module and workflow changes in the sandbox branch before promoting tested commits to production.</p>
+          <div class="status-line">
+            <span>Production branch</span>
+            <span class="status-pill">main</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="environment-title">
+      <p class="eyebrow">Source control</p>
+      <h2 id="environment-title">Environment conventions</h2>
+      <table class="environment-table">
+        <thead>
+          <tr>
+            <th scope="col">Environment</th>
+            <th scope="col">Git branch</th>
+            <th scope="col">Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Production</strong></td>
+            <td><code>main</code></td>
+            <td>Approved, customer-facing operation.</td>
+          </tr>
+          <tr>
+            <td><strong>Sandbox</strong></td>
+            <td><code>sandbox</code></td>
+            <td>Testing, screenshots, upgrades, and user acceptance before promotion.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Foresight Packaging Solutions · Odoo 19</p>
+      <p>Documentation reviewed 8 September 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

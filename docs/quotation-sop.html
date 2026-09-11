@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SOP for creating an Odoo quotation with or without a Program project.">
+  <meta name="theme-color" content="#12223d">
+  <title>Create an Odoo Quotation · SOP</title>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to procedure</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Foresight Odoo Documentation home">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        <span>Odoo Documentation</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="quotation-sop.html" aria-current="page">Quotation SOP</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="index.html">Documentation</a>
+      <span aria-hidden="true">/</span>
+      <span>Quotation SOP</span>
+    </nav>
+
+    <header class="guide-head">
+      <p class="eyebrow">Standard operating procedure · Sales</p>
+      <h1>Create an Odoo quotation</h1>
+      <p class="lede">Use this procedure to create either a standard customer quotation or a quotation that belongs to a tracked Program project.</p>
+      <div class="guide-meta" aria-label="Document metadata">
+        <span class="meta-pill">System: Odoo 19</span>
+        <span class="meta-pill">Applies to: Production and sandbox</span>
+        <span class="meta-pill">Reviewed: 8 Sep 2026</span>
+      </div>
+      <div class="action-bar">
+        <button class="print-button" type="button" onclick="window.print()">Print this SOP</button>
+      </div>
+    </header>
+
+    <div class="guide-layout">
+      <aside class="toc" aria-label="On this page">
+        <strong>On this page</strong>
+        <a href="#choose">Choose the quote type</a>
+        <a href="#prepare">Before you start</a>
+        <a href="#start">Start a quotation</a>
+        <a href="#standard">Without a project</a>
+        <a href="#project">With a project</a>
+        <a href="#lines">Add products</a>
+        <a href="#finish">Review and finish</a>
+        <a href="#troubleshoot">Troubleshooting</a>
+        <a href="#checklist">Final checklist</a>
+      </aside>
+
+      <article class="guide-content">
+        <section id="choose" class="guide-section">
+          <p class="eyebrow">Decision point</p>
+          <h2>Choose the quote type first</h2>
+          <p>Ask one question: will this work be tracked as a Program project through quoting, warehouse operations, and the Program dashboard?</p>
+          <div class="decision-grid">
+            <div class="decision no">
+              <strong>No — standard quotation</strong>
+              Leave <b>Is a Project</b> unchecked. Program Name, Program Type, and Program are not used.
+            </div>
+            <div class="decision yes">
+              <strong>Yes — project quotation</strong>
+              Check <b>Is a Project</b>, enter a Program Name, and link or create the correct Program.
+            </div>
+          </div>
+          <div class="callout critical">
+            <strong>Operational rule:</strong> A project quote needs both <b>Is a Project</b> checked and a <b>Program Name</b>. Without both, it will not be included on the Program dashboard. A Program Name on a non-project quote is ignored.
+          </div>
+        </section>
+
+        <section id="prepare" class="guide-section">
+          <p class="eyebrow">Preparation</p>
+          <h2>Before you start</h2>
+          <p>Have the following information ready:</p>
+          <ul>
+            <li>Customer and the correct invoice and delivery addresses.</li>
+            <li>Customer PO number, when supplied.</li>
+            <li>Products or services, quantities, selling prices, taxes, and any discount.</li>
+            <li>Expiration date, payment terms, and quotation template, when applicable.</li>
+            <li>For a project: the Program Name, Program Type, and whether an existing Program should be linked.</li>
+          </ul>
+          <div class="callout warning">
+            <strong>Environment:</strong> Practice or validate changes in the sandbox. Create customer-facing records in production only when the quote is ready for live processing.
+          </div>
+        </section>
+
+        <section id="start" class="guide-section">
+          <p class="eyebrow">Common start</p>
+          <h2>Start a new quotation</h2>
+          <ol class="steps">
+            <li>Open the <strong>Sales</strong> app.</li>
+            <li>Go to <strong>Orders → Quotations</strong>.</li>
+            <li>Select <strong>New</strong>.</li>
+          </ol>
+          <figure class="figure">
+            <img src="assets/quotation-start.jpg" width="930" height="135" alt="Odoo Sales Quotations page with the New button at the upper left.">
+            <figcaption>Figure 1 — In Sales → Quotations, select <b>New</b>. Screenshot taken in the neutralized sandbox.</figcaption>
+          </figure>
+        </section>
+
+        <section id="standard" class="guide-section">
+          <p class="eyebrow">Path A</p>
+          <h2>Create a quotation without a project</h2>
+          <ol class="steps">
+            <li><strong>Select the Customer.</strong> Odoo fills the invoice and delivery addresses from the customer record; confirm both are correct.</li>
+            <li><strong>Enter the PO Number</strong> if the customer supplied one.</li>
+            <li><strong>Leave Is a Project unchecked.</strong> Do not enter or retain a Program Name, Program Type, or Program link.</li>
+            <li><strong>Review commercial settings:</strong> expiration, quotation date, payment terms, recurring plan, and quotation template.</li>
+            <li>Continue to <a href="#lines">Add products or services</a>.</li>
+          </ol>
+          <figure class="figure">
+            <img src="assets/quotation-standard.jpg" width="1363" height="520" alt="Blank Odoo quotation form with Is a Project unchecked and no Program fields displayed.">
+            <figcaption>Figure 2 — Standard quotation state. <b>Is a Project</b> remains unchecked and the project-only fields stay hidden.</figcaption>
+          </figure>
+        </section>
+
+        <section id="project" class="guide-section">
+          <p class="eyebrow">Path B</p>
+          <h2>Create a quotation with a project</h2>
+          <ol class="steps">
+            <li><strong>Select the Customer</strong> and verify the invoice and delivery addresses.</li>
+            <li><strong>Check Is a Project.</strong> Odoo displays Program Name, Program Type, and Program.</li>
+            <li><strong>Enter Program Name.</strong> Use the clear, customer-recognizable name that should appear on the Program dashboard and warehouse operation cards.</li>
+            <li><strong>Link the Program.</strong> If it already exists, select it in <b>Program</b>; Odoo fills its Program Type. For a new Program, select the correct <b>Program Type</b>, save the quotation, then use <b>Create Program</b> when the button appears.</li>
+            <li><strong>Complete the remaining quote fields</strong>, including PO Number, expiration, payment terms, addresses, and quotation template.</li>
+            <li>Continue to <a href="#lines">Add products or services</a>.</li>
+          </ol>
+          <figure class="figure">
+            <img src="assets/quotation-project.jpg" width="1363" height="520" alt="Odoo quotation form with Is a Project checked and Program Name, Program Type, and Program fields displayed.">
+            <figcaption>Figure 3 — Project quotation state. Checking <b>Is a Project</b> reveals the three Program fields.</figcaption>
+          </figure>
+          <div class="callout">
+            <strong>Existing Program shortcut:</strong> When the Program already exists in Program Builder, its <b>Create Quote</b> action is the preferred starting point. It links the quote automatically and uses the Program Type's default quotation template; return here to review the generated quotation before sending it.
+          </div>
+        </section>
+
+        <section id="lines" class="guide-section">
+          <p class="eyebrow">Both paths</p>
+          <h2>Add products or services</h2>
+          <ol class="steps">
+            <li>On <strong>Order Lines</strong>, select <strong>Add a product</strong> or open <strong>Catalog</strong>.</li>
+            <li>Select the product or service and enter the <strong>Quantity</strong>.</li>
+            <li>Verify the <strong>Unit</strong>, <strong>Unit Price</strong>, <strong>Taxes</strong>, and <strong>Discount</strong>.</li>
+            <li>Repeat for each line. Use <strong>Add a section</strong> to group the quote and <strong>Add a note</strong> for customer-facing explanations.</li>
+            <li>Confirm the untaxed amount, taxes, and total at the bottom of the quotation.</li>
+          </ol>
+          <figure class="figure">
+            <img src="assets/quotation-lines.jpg" width="1363" height="360" alt="Odoo quotation Order Lines area showing a new product row with quantity, unit, unit price, taxes, discount, and amount columns.">
+            <figcaption>Figure 4 — The Order Lines entry row. Check pricing, tax, discount, and quantity before moving on.</figcaption>
+          </figure>
+        </section>
+
+        <section id="finish" class="guide-section">
+          <p class="eyebrow">Both paths</p>
+          <h2>Review and finish</h2>
+          <ol class="steps">
+            <li><strong>Save the quotation.</strong> Confirm Odoo assigns a quotation number.</li>
+            <li><strong>Preview</strong> the customer document. Check customer name, addresses, PO number, line descriptions, quantities, pricing, taxes, terms, and totals.</li>
+            <li><strong>Send</strong> the quotation when it is ready for the customer. Review the recipient and attached quotation before sending.</li>
+            <li><strong>Confirm</strong> only after the customer accepts. Confirmation changes the quotation to a Sales Order and may start downstream purchasing, inventory, manufacturing, or delivery activity.</li>
+          </ol>
+          <div class="callout critical">
+            <strong>Do not confirm early:</strong> Confirmation is an operational handoff, not just a status label. Resolve pricing, addresses, terms, and Program linkage first.
+          </div>
+        </section>
+
+        <section id="troubleshoot" class="guide-section">
+          <p class="eyebrow">Exceptions</p>
+          <h2>Troubleshooting</h2>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th scope="col">What you see</th>
+                <th scope="col">What it means</th>
+                <th scope="col">What to do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Is a Project</b> is missing</td>
+                <td>Program features are not enabled for the quotation's company.</td>
+                <td>Check the correct company is selected. Ask an administrator to review <b>Use Programs</b> for that company.</td>
+              </tr>
+              <tr>
+                <td>Program fields are hidden</td>
+                <td><b>Is a Project</b> is not checked, or Programs are disabled for the company.</td>
+                <td>Check <b>Is a Project</b> only when the quotation is truly a tracked project.</td>
+              </tr>
+              <tr>
+                <td>Project is absent from the Program dashboard</td>
+                <td>The quote is not marked as a project, Program Name is blank, the company is not enabled, or the quote is cancelled.</td>
+                <td>Correct the project flag and Program Name on the active quote, then refresh the dashboard.</td>
+              </tr>
+              <tr>
+                <td><b>Create Program</b> is not visible</td>
+                <td>A Program is already linked, or Program Type has not been selected.</td>
+                <td>Choose an existing Program or select the correct Program Type first.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="checklist" class="guide-section">
+          <p class="eyebrow">Quality check</p>
+          <h2>Final checklist</h2>
+          <ul class="checklist">
+            <li>Correct customer, invoice address, and delivery address</li>
+            <li>PO number entered when supplied</li>
+            <li>Project choice is correct; project quotes have a Program Name and Program link or creation plan</li>
+            <li>Products, quantities, units, prices, taxes, discounts, and totals verified</li>
+            <li>Expiration, payment terms, template, and customer-facing notes reviewed</li>
+            <li>Preview checked before Send; acceptance received before Confirm</li>
+          </ul>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Foresight Packaging Solutions · Odoo 19</p>
+      <p>Screenshots captured in the neutralized sandbox; no test quotation was saved.</p>
+    </div>
+  </footer>
+</body>
+</html>
