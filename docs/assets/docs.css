@@ -840,3 +840,20 @@ code {
 .change-table small { display: block; margin-top: 3px; color: var(--muted); }
 @media (max-width: 880px) { .module-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media (max-width: 640px) { .library-tools, .module-grid, .version-panel { grid-template-columns: 1fr; } .library-head { padding: 24px; } }
+.quick-rules { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 22px; }
+.quick-rules div { display: flex; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #f8fafc; align-items: center; gap: 12px; }
+.quick-rules strong { display: grid; width: 32px; height: 32px; flex: 0 0 auto; border-radius: 9px; background: var(--navy); color: #fff; place-items: center; }
+.quick-rules span { color: var(--muted); font-size: .9rem; }
+.quick-start-list { margin-top: 38px; }
+.quick-category { margin-bottom: 44px; }
+.quick-category-head h2 { margin-bottom: 18px; }
+.quick-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+.quick-card { display: flex; min-height: 260px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); flex-direction: column; }
+.quick-card > div { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.quick-card h3 { max-width: 72%; }
+.quick-card dl { margin: 12px 0 18px; }
+.quick-card dt { margin-top: 11px; color: var(--navy); font-size: .8rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.quick-card dd { margin: 3px 0 0; color: var(--muted); }
+.quick-card a { margin-top: auto; font-weight: 740; }
+@media (max-width: 880px) { .quick-rules { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .quick-grid { grid-template-columns: 1fr; } }
