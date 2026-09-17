@@ -94,8 +94,19 @@ function renderChanges() {
   body.innerHTML = ACTIVE_MODULES.slice().sort((a,b)=>a.name.localeCompare(b.name)).map((item) => `<tr><td><a href="manual.html?module=${encodeURIComponent(item.slug)}">${esc(item.name)}</a><small>${esc(item.module)}</small></td><td><code>${esc(item.version)}</code></td><td>${esc(item.category)}</td><td><a href="${repositoryUrl(item)}/commits" target="_blank" rel="noreferrer">History</a></td></tr>`).join('');
 }
 
+function renderQuickStart() {
+  const target = document.querySelector('[data-quick-start]');
+  if (!target) return;
+  const categories = [...new Set(ACTIVE_MODULES.map((item) => item.category))].sort();
+  target.innerHTML = categories.map((category) => {
+    const modules = ACTIVE_MODULES.filter((item) => item.category === category).sort((a,b) => a.name.localeCompare(b.name));
+    return `<section class="quick-category"><div class="quick-category-head"><p class="eyebrow">${esc(category)}</p><h2>${esc(category)}</h2></div><div class="quick-grid">${modules.map((item) => `<article class="quick-card"><div><h3>${esc(item.name)}</h3><code>${esc(item.version)}</code></div><dl><dt>Before you begin</dt><dd>${esc(item.setup[0])}</dd><dt>Start here</dt><dd>${esc(item.use[0])}</dd></dl><a href="manual.html?module=${encodeURIComponent(item.slug)}">Open full manual →</a></article>`).join('')}</div></section>`;
+  }).join('');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('[data-module-grid]')) renderLibrary();
   if (document.querySelector('[data-manual]')) renderManual(new URLSearchParams(location.search).get('module'));
   if (document.querySelector('[data-change-table]')) renderChanges();
+  if (document.querySelector('[data-quick-start]')) renderQuickStart();
 });
