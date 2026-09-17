@@ -857,3 +857,8 @@ code {
 .quick-card a { margin-top: auto; font-weight: 740; }
 @media (max-width: 880px) { .quick-rules { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .quick-grid { grid-template-columns: 1fr; } }
+.illustrated-walkthrough { margin-top: 32px; }
+.walkthrough-part { margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line); }
+.walkthrough-part:first-child { margin-top: 0; }
+.step-label { margin-bottom: 5px; color: var(--teal); font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.walkthrough-part h3 { font-size: 1.45rem; }
