@@ -883,3 +883,5 @@ code {
 @media (max-width: 760px) { .flow-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } .flow-steps li:nth-child(2)::after { display: none; } }
 @media (max-width: 500px) { .flow-steps { grid-template-columns: 1fr; gap: 24px; } .flow-steps li:not(:last-child)::after { top: auto; right: 50%; bottom: -25px; transform: translateX(50%) rotate(90deg); } .flow-steps li:nth-child(2)::after { display: block; } }
 .walkthrough-part h3 { font-size: 1.45rem; }
+
+.quick-card-text { grid-template-columns: 1fr; }
