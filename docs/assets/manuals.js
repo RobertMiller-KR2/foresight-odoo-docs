@@ -138,10 +138,12 @@ function renderChanges() {
 function renderQuickStart() {
   const target = document.querySelector('[data-quick-start]');
   if (!target) return;
-  const categories = [...new Set(ACTIVE_MODULES.map((item) => item.category))].sort();
+  // Barcode Silk ZXing Fix changes the scanner internally; it adds no user task.
+  const modulesWithUserTasks = ACTIVE_MODULES.filter((item) => item.slug !== 'barcode-silk-zxing-fix');
+  const categories = [...new Set(modulesWithUserTasks.map((item) => item.category))].sort();
   target.innerHTML = categories.map((category) => {
-    const modules = ACTIVE_MODULES.filter((item) => item.category === category).sort((a,b) => a.name.localeCompare(b.name));
-    return `<section class="quick-category"><div class="quick-category-head"><p class="eyebrow">${esc(category)}</p><h2>${esc(category)}</h2></div><div class="quick-grid">${modules.map((item) => `<article class="quick-card"><div><h3>${esc(item.name)}</h3><code>${esc(item.version)}</code></div><dl><dt>Before you begin</dt><dd>${esc(item.setup[0])}</dd><dt>Start here</dt><dd>${esc(item.use[0])}</dd></dl><a href="manual.html?module=${encodeURIComponent(item.slug)}">Open full manual →</a></article>`).join('')}</div></section>`;
+    const modules = modulesWithUserTasks.filter((item) => item.category === category).sort((a,b) => a.name.localeCompare(b.name));
+    return `<section class="quick-category"><div class="quick-category-head"><p class="eyebrow">${esc(category)}</p><h2>${esc(category)}</h2></div><div class="quick-grid">${modules.map((item) => `<article class="quick-card"><div><h3>${esc(item.name)}</h3><code>${esc(item.version)}</code></div><ol class="quick-steps">${item.use.map((step) => `<li>${esc(step)}</li>`).join('')}</ol><a href="manual.html?module=${encodeURIComponent(item.slug)}">Open full manual →</a></article>`).join('')}</div></section>`;
   }).join('');
 }
 
