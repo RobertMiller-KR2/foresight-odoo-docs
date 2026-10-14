@@ -843,15 +843,20 @@ code {
 .quick-start-list { margin-top: 38px; }
 .quick-category { margin-bottom: 44px; }
 .quick-category-head h2 { margin-bottom: 18px; }
-.quick-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
-.quick-card { display: flex; min-height: 260px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); flex-direction: column; }
-.quick-card > div { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
-.quick-card h3 { max-width: 72%; }
+.quick-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.quick-card { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); gap: 26px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+.quick-card h3 { margin: 4px 0 0; }
+.quick-card-copy { display: flex; flex-direction: column; align-items: flex-start; }
+.quick-card-copy .eyebrow { margin: 0; }
 .quick-steps { margin: 16px 0 22px; padding-left: 22px; color: var(--muted); }
 .quick-steps li { padding-left: 4px; margin-bottom: 9px; }
 .quick-steps li::marker { color: var(--teal); font-weight: 800; }
-.quick-card a { margin-top: auto; font-weight: 740; }
-@media (max-width: 640px) { .quick-grid { grid-template-columns: 1fr; } }
+.quick-card-copy > a { margin-top: auto; font-weight: 740; }
+.quick-shot { margin: 0; align-self: start; }
+.quick-shot a { display: block; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #f6f8fb; }
+.quick-shot img { display: block; width: 100%; max-height: 360px; object-fit: contain; object-position: top; }
+.quick-shot figcaption { margin-top: 8px; color: var(--muted); font-size: .86rem; }
+@media (max-width: 880px) { .quick-card { grid-template-columns: 1fr; } }
 .illustrated-walkthrough { margin-top: 32px; }
 .walkthrough-part { margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line); }
 .walkthrough-part:first-child { margin-top: 0; }
