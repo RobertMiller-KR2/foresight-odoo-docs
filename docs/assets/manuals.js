@@ -47,6 +47,25 @@ const MODULES = [
   {slug:'product-on-order-column',module:'product_on_order_column',name:'Product On Order Column',version:'19.0.1.0.0',category:'Products & Inventory',repo:'product-on-order-column',summary:'Shows outstanding confirmed purchase-order quantity on the product list for the active company.',setup:['Open Purchase → Configuration → Settings.','Under Product List, enable Show On Order Column for the current company and save.','Repeat for any other company that should see the column.'],use:['Open the product list in the company where the setting is enabled.','Review On Order alongside existing stock quantities.','Open the purchase orders when you need supplier, date, or line-level detail.'],troubleshoot:['If the column is absent, confirm the active company and the Product List setting.','On Order reflects confirmed purchase-order quantity remaining to receive; draft orders are excluded.'],walkthrough:[{title:'Enable the column',image:'assets/screenshots/product-on-order-setting.jpg',caption:'The Purchase settings page shows the company-specific Show On Order Column option.',steps:['Select the intended company.','Open Purchase → Configuration → Settings.','Enable Show On Order Column and save.','Open the product list to verify the column.']}]},
 ];
 
+// The same receipt-level status appears beside every item on that receipt.
+const RECEIPT_VALIDATION_GUIDE = [
+  {pricing:'Awaiting Price Confirmation',validation:'Required',next:'Select Open to Validate. An Inventory or Purchase Administrator opens Confirm Receipt Pricing, reviews each unit cost and confirms pricing. Then review quantities and validate the receipt.'},
+  {pricing:'Pricing Confirmed',validation:'Required',next:'Pricing has been approved, but receiving is not complete. Select Open to Validate, review the receipt and choose Validate. Complete any backorder or other validation wizard that appears.'},
+  {pricing:'Not Required',validation:'Required',next:'The warehouse does not require price confirmation for this receipt. Select Open to Validate, review quantities and validate through the normal receipt controls.'},
+  {pricing:'Any displayed value',validation:'Complete',next:'The incoming receipt is already validated. No further receipt validation is needed. Complete any separate Storage or put-away transfer when applicable.'}
+];
+for (const slug of ['daily-received-items','weekly-received-items']) {
+  const item=MODULES.find((entry)=>entry.slug===slug);
+  item.statusGuide=RECEIPT_VALIDATION_GUIDE;
+  item.statusNotes=[
+    'Pricing and Final Validation describe the whole receipt. Products from the same receipt repeat those statuses; open the receipt once and validate it once.',
+    'Recording physical arrival and printing barcode labels do not approve costs or complete receipt validation. Stock remains unreceived until the receipt is validated.',
+    'If products or quantities change before final validation, pricing must be confirmed again. Refresh the report to see the current status.',
+    'Open to Validate opens the normal receipt form and honors your permissions. If Confirm Receipt Pricing is unavailable, ask an Inventory or Purchase Administrator to review it.',
+    'Use Requires Final Validation to find pending receipts, then read Pricing to distinguish receipts awaiting approval from those ready for final validation.'
+  ];
+}
+
 // Baseline versions verified against the 13 October 2026 production release.
 // Receiving updates document the newer sandbox-tested workflow; see each guide.
 const RELEASE_VERSIONS = {
@@ -120,12 +139,13 @@ function renderManual(slug) {
     </header>
     ${item.availability ? `<div class="callout"><strong>Availability:</strong> ${esc(item.availability)}</div>` : ''}
     <div class="guide-layout">
-      <aside class="toc"><strong>On this page</strong><a href="#purpose">Purpose</a><a href="#screenshots">Screenshots</a><a href="#setup">Setup</a><a href="#use">How to use it</a><a href="#troubleshoot">Troubleshooting</a><a href="#changes">Changes</a></aside>
+      <aside class="toc"><strong>On this page</strong><a href="#purpose">Purpose</a><a href="#screenshots">Screenshots</a><a href="#setup">Setup</a><a href="#use">How to use it</a>${item.statusGuide ? '<a href="#validation-status">Pricing and validation</a>' : ''}<a href="#troubleshoot">Troubleshooting</a><a href="#changes">Changes</a></aside>
       <article class="guide-content">
         <section id="purpose" class="guide-section"><p class="eyebrow">Overview</p><h2>Purpose and users</h2><p>${esc(item.summary)}</p><p>Use this module only in the company and environment appropriate to the record. Validate configuration and workflow changes in the sandbox before using them in production.</p></section>
         <section id="screenshots" class="guide-section"><p class="eyebrow">Screen reference</p><h2>Find the module in Apps</h2><figure class="figure"><img src="assets/screenshots/${esc(item.slug)}-card.jpg" alt="Odoo Apps card for ${esc(item.name)}" loading="lazy"><figcaption>Odoo Apps card captured 14 October 2026. Its button shows the availability at capture time; check Apps for the current installation state.</figcaption></figure>${item.walkthrough ? '<p>Additional workflow screenshots appear with the steps below.</p>' : ''}</section>
         <section id="setup" class="guide-section"><p class="eyebrow">Administrator setup</p><h2>Configure the module</h2>${list(item.setup)}</section>
         <section id="use" class="guide-section"><p class="eyebrow">Daily workflow</p><h2>How to use it</h2>${list(item.use)}${item.walkthrough ? `<div class="illustrated-walkthrough">${item.walkthrough.map((part,index)=>`<div class="walkthrough-part"><p class="step-label">Process ${index+1}</p><h3>${esc(part.title)}</h3>${list(part.steps)}<figure class="figure"><img src="${esc(part.image)}" alt="${esc(part.caption)}"><figcaption>${esc(part.caption)}</figcaption></figure></div>`).join('')}</div>` : ''}</section>
+        ${item.statusGuide ? `<section id="validation-status" class="guide-section"><p class="eyebrow">Receipt follow-up</p><h2>Read Pricing and Final Validation</h2><p>Use both columns together to decide the next step. Price confirmation and final stock validation are separate steps.</p><div class="table-scroll"><table class="comparison-table"><thead><tr><th>Pricing</th><th>Final Validation</th><th>What to do</th></tr></thead><tbody>${item.statusGuide.map((row)=>`<tr><td>${esc(row.pricing)}</td><td>${esc(row.validation)}</td><td>${esc(row.next)}</td></tr>`).join('')}</tbody></table></div><ul>${item.statusNotes.map((note)=>`<li>${esc(note)}</li>`).join('')}</ul></section>` : ''}
         <section id="troubleshoot" class="guide-section"><p class="eyebrow">Support</p><h2>Troubleshooting</h2><ul>${item.troubleshoot.map((x) => `<li>${esc(x)}</li>`).join('')}</ul><div class="callout warning"><strong>Before escalating:</strong> record the company, user, document number, exact error, and the steps that produced it. Do not include customer-sensitive data in public issue reports.</div></section>
         <section id="changes" class="guide-section"><p class="eyebrow">Change tracking</p><h2>Version and repository history</h2><div class="version-panel"><div><span>Documented source version</span><strong>${esc(item.version)}</strong></div><div><span>Module identifier</span><strong>${esc(item.module)}</strong></div></div><p>This register records the source version documented for this guide. Check Odoo Apps for the current installed version and status. The repository commit history is the technical change record.</p><a href="${repositoryUrl(item)}/commits" target="_blank" rel="noreferrer">Open repository history</a><p class="privacy-note">Repository access may require an authorized GitHub account.</p></section>
       </article>
