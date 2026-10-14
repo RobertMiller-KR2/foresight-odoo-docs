@@ -115,6 +115,8 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .site-nav a {
@@ -861,4 +863,23 @@ code {
 .walkthrough-part { margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line); }
 .walkthrough-part:first-child { margin-top: 0; }
 .step-label { margin-bottom: 5px; color: var(--teal); font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+
+/* Daily operations map */
+.flow-lane { margin: 20px 0 24px; }
+.flow-lane h3 { margin-bottom: 12px; }
+.flow-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
+.flow-steps li { position: relative; min-width: 0; }
+.flow-steps li:not(:last-child)::after { position: absolute; top: 45%; right: -18px; color: var(--teal); content: '→'; font-size: 1.35rem; font-weight: 800; }
+.flow-steps a, .flow-steps .flow-result > span { display: flex; min-height: 120px; padding: 15px; border: 1px solid #b9d9da; border-radius: 12px; background: var(--teal-soft); color: var(--ink); flex-direction: column; text-decoration: none; }
+.flow-steps a:hover { border-color: var(--teal); box-shadow: 0 6px 18px rgba(0, 127, 134, .12); }
+.flow-steps small { color: var(--teal); font-size: .72rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.flow-steps strong { margin: 3px 0; color: var(--navy); line-height: 1.2; }
+.flow-steps span { color: var(--muted); font-size: .84rem; line-height: 1.3; }
+.flow-steps .flow-result > span { border-color: #badcc7; background: var(--green-soft); }
+.outbound .flow-steps a { border-color: #e9d5ad; background: var(--amber-soft); }
+.outbound .flow-steps small, .outbound .flow-steps li:not(:last-child)::after { color: #9a620e; }
+.flow-note { margin: 4px 0 0; color: var(--muted); font-size: .93rem; }
+.daily-guide-grid .guide-section { max-width: 900px; margin: 0 auto 28px; }
+@media (max-width: 760px) { .flow-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } .flow-steps li:nth-child(2)::after { display: none; } }
+@media (max-width: 500px) { .flow-steps { grid-template-columns: 1fr; gap: 24px; } .flow-steps li:not(:last-child)::after { top: auto; right: 50%; bottom: -25px; transform: translateX(50%) rotate(90deg); } .flow-steps li:nth-child(2)::after { display: block; } }
 .walkthrough-part h3 { font-size: 1.45rem; }

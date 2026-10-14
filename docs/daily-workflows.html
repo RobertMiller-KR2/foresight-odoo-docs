@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Illustrated daily Odoo tasks for purchasing, receiving, stocking, quoting, ordering, picking, and shipping.">
+  <title>Daily Workflows · Foresight Odoo Documentation</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/docs.css?v=20261014-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to daily workflows</a>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="index.html"><span class="brand-mark">F</span><span>Odoo Documentation</span></a><nav class="site-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="daily-workflows.html" aria-current="page">Daily workflows</a><a href="quick-start.html">Quick start</a><a href="modules.html">Module manuals</a><a href="changes.html">Changes</a><a href="quotation-sop.html">Quotation SOP</a></nav></div></header>
+  <main id="main" class="page-shell">
+    <header class="guide-head compact-head">
+      <p class="eyebrow">Everyday work · Odoo 19</p>
+      <h1>From purchase order to shipment</h1>
+      <p class="lede">Short guides for the tasks people perform each day. Warehouse screenshots show the Barcode app; sales and purchasing screenshots show their own forms.</p>
+      <div class="action-bar"><button class="print-button" type="button" onclick="window.print()">Print these guides</button></div>
+    </header>
+
+    <section class="guide-section" id="flow" aria-labelledby="flow-title">
+      <p class="eyebrow">Process map</p><h2 id="flow-title">How the work moves</h2>
+      <p>Purchasing brings goods into stock. Sales creates the customer commitment and starts the outbound work. Select a step to jump to its guide.</p>
+      <div class="flow-lane" aria-label="Inbound purchasing and warehouse flow">
+        <h3>Inbound · get stock ready</h3>
+        <ol class="flow-steps">
+          <li><a href="#purchase-order"><small>Purchase</small><strong>Create RFQ / PO</strong><span>Order from vendor</span></a></li>
+          <li><a href="#receive"><small>Barcode</small><strong>Receive</strong><span>Scan what arrived</span></a></li>
+          <li><a href="#stock"><small>Barcode</small><strong>Stock / put away</strong><span>Move to bin</span></a></li>
+          <li class="flow-result"><span><small>Inventory</small><strong>Stock available</strong><span>Ready for orders</span></span></li>
+        </ol>
+      </div>
+      <div class="flow-lane outbound" aria-label="Outbound sales and warehouse flow">
+        <h3>Outbound · fulfill the customer order</h3>
+        <ol class="flow-steps">
+          <li><a href="#quote"><small>Sales</small><strong>Quote</strong><span>Price the request</span></a></li>
+          <li><a href="#sales-order"><small>Sales</small><strong>Sales order</strong><span>Confirm acceptance</span></a></li>
+          <li><a href="#pick"><small>Barcode</small><strong>Pick ticket</strong><span>Scan items from bins</span></a></li>
+          <li><a href="#ship"><small>Barcode</small><strong>Shipping</strong><span>Validate delivery</span></a></li>
+        </ol>
+      </div>
+      <p class="flow-note">The exact handoff depends on the warehouse route and stock availability. A confirmed PO normally generates a receipt; a confirmed sales order can generate a pick and delivery. Finish each Barcode operation only after its actual quantities and destination are correct.</p>
+    </section>
+
+    <div class="daily-guide-grid">
+      <section class="guide-section" id="purchase-order"><p class="eyebrow">01 · Purchasing</p><h2>Create a purchase order</h2>
+        <ol class="steps"><li>Open <strong>Purchase → Requests for Quotation</strong> and select <strong>New</strong>.</li><li>Choose the vendor, add products and quantities, then check price, expected arrival, and <strong>Deliver To</strong>.</li><li>Save and send the RFQ for vendor review when needed. Select <strong>Confirm Order</strong> once the purchase is approved.</li><li>Open the receipt linked to the PO when the goods arrive.</li></ol>
+        <figure class="figure"><img src="assets/screenshots/daily-create-po.jpg" width="1200" height="667" loading="lazy" alt="Blank Purchase RFQ form showing vendor, expected arrival, product lines, and Confirm Order controls."><figcaption>Purchase → Requests for Quotation → New. Review the order lines before confirming.</figcaption></figure>
+      </section>
+
+      <section class="guide-section" id="receive"><p class="eyebrow">02 · Barcode receiving</p><h2>Receive goods</h2>
+        <ol class="steps"><li>Open <strong>Barcode → Operations → Receipts</strong> for the correct warehouse.</li><li>Scan the receipt barcode or select the receipt from the queue. Match it to the PO and physical delivery.</li><li>Scan each product and enter the quantity actually received. Record any shortage or exception shown on the transfer.</li><li>Select <strong>Validate</strong> only after the received quantities are correct. If a separate Storage transfer appears, finish that next.</li></ol>
+        <figure class="figure"><img src="assets/screenshots/daily-barcode-receipts.jpg" width="1167" height="600" loading="lazy" alt="Barcode Receipts screen with To Do and Ready filters and a prompt to scan a transfer or product."><figcaption>Barcode → Operations → Receipts. Scan a transfer or choose it from the queue.</figcaption></figure>
+      </section>
+
+      <section class="guide-section" id="stock"><p class="eyebrow">03 · Barcode storage</p><h2>Put received goods in stock</h2>
+        <ol class="steps"><li>Open <strong>Barcode → Operations → Storage</strong> and select the ready transfer created for putaway.</li><li>Scan the product and its destination bin or location as prompted.</li><li>Check the quantity moved to that location. Repeat for every line and destination.</li><li>Select <strong>Validate</strong> when the putaway is physically complete.</li></ol>
+        <figure class="figure"><img src="assets/screenshots/daily-barcode-storage.jpg" width="1333" height="350" loading="lazy" alt="Barcode Storage queue with ready transfer cards."><figcaption>Barcode → Operations → Storage. Open the matching ready transfer.</figcaption></figure>
+        <figure class="figure"><img src="assets/screenshots/daily-barcode-storage-scan.jpg" width="1111" height="128" loading="lazy" alt="Barcode Storage transfer showing the Scan a product prompt."><figcaption>Inside the transfer, follow the scan prompt and verify the destination before validating.</figcaption></figure>
+      </section>
+
+      <section class="guide-section" id="quote"><p class="eyebrow">04 · Sales</p><h2>Create a customer quote</h2>
+        <ol class="steps"><li>Open <strong>Sales → Orders → Quotations</strong> and select <strong>New</strong>.</li><li>Choose the customer and add product lines, quantities, and prices.</li><li>Check delivery address, customer PO number if supplied, taxes, terms, and total.</li><li>Save, preview, and send the quotation when it is ready for the customer.</li></ol>
+        <figure class="figure"><img src="assets/quotation-standard.jpg" width="1363" height="520" loading="lazy" alt="Blank Sales quotation form with customer, order lines, Send, and Confirm controls."><figcaption>Sales quotation form. Add the customer and lines, then review before sending.</figcaption></figure>
+        <p>For Program quotes, use the <a href="quotation-sop.html">detailed quotation SOP</a> to link the Program correctly.</p>
+      </section>
+
+      <section class="guide-section" id="sales-order"><p class="eyebrow">05 · Sales</p><h2>Confirm a sales order</h2>
+        <ol class="steps"><li>Open the accepted quotation in <strong>Sales → Orders → Quotations</strong>.</li><li>Recheck customer, products, quantities, prices, delivery address, and promised date.</li><li>Select <strong>Confirm</strong>. Odoo changes the quotation to a sales order.</li><li>Open its delivery or warehouse transfer and check the next operation assigned by the route.</li></ol>
+        <figure class="figure"><img src="assets/quotation-standard.jpg" width="1363" height="520" loading="lazy" alt="Sales quotation form with Confirm button used to turn an accepted quote into a sales order."><figcaption>After the customer accepts, select Confirm on the quotation.</figcaption></figure>
+      </section>
+
+      <section class="guide-section" id="pick"><p class="eyebrow">06 · Barcode picking</p><h2>Complete a pick ticket</h2>
+        <ol class="steps"><li>Open <strong>Barcode → Operations → Pick</strong> for the correct warehouse.</li><li>Scan the pick ticket or select its ready card. Check the transfer reference.</li><li>Scan the source bin and each product; enter the quantity actually picked.</li><li>Move goods to the destination shown on the ticket and select <strong>Validate</strong> when the pick is complete.</li></ol>
+        <figure class="figure"><img src="assets/screenshots/daily-barcode-pick.jpg" width="1167" height="183" loading="lazy" alt="Barcode Pick screen with To Do and Ready filters and scan prompt."><figcaption>Barcode → Operations → Pick. The queue accepts a scanned ticket or a selected card.</figcaption></figure>
+      </section>
+
+      <section class="guide-section" id="ship"><p class="eyebrow">07 · Barcode shipping</p><h2>Ship the customer order</h2>
+        <ol class="steps"><li>Open <strong>Barcode → Operations → Delivery Orders</strong> for the correct warehouse.</li><li>Scan the delivery transfer or select it from the ready queue. Confirm the destination and items match the shipment.</li><li>Scan products or packages as prompted and verify the quantity being shipped.</li><li>When the goods have been handed off and the details are correct, select <strong>Validate</strong> to complete the delivery.</li></ol>
+        <figure class="figure"><img src="assets/screenshots/daily-barcode-shipping.jpg" width="1167" height="600" loading="lazy" alt="Barcode Delivery Orders screen with To Do and Ready filters and scan prompt."><figcaption>Barcode → Operations → Delivery Orders. Validate only the goods actually shipped.</figcaption></figure>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-inner"><p>Foresight Packaging Solutions · Odoo 19</p><p>Daily workflows reviewed 14 October 2026</p></div></footer>
+</body>
+</html>
