@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "docs/**"
+      - "tools/**"
       - ".github/workflows/documentation-pages.yml"
   workflow_dispatch:
 
@@ -27,6 +28,11 @@ jobs:
     steps:
       - name: Check out production
         uses: actions/checkout@v7
+
+      - name: Validate documentation
+        run: |
+          node --check docs/assets/manuals.js
+          node tools/check-docs.cjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v6
